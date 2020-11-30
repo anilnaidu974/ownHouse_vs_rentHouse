@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Own House Vs Rent House</title>
+
+    <!-- Icons font CSS-->
+    <link href="static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="static/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="static/css/main.css" rel="stylesheet" media="all">
+    <!-- <link rel="icon" href="data:;base64,iVBORw0KGgo="> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+
+    <style>
+        /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+        position: absolute;
+        left: 25%;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    
+
+    <div id="myModal" class="modal">
+        <div class="modal-dialog" >
+            
+            <div class="modal-content">
+                
+                <div class="modal-body" style = "text-align: center;">
+                    <h4 ><span id = "result"></span> House is more profitable to you</h4>
+                    <br>
+                    <button id ="modalok" type="button" class="btn btn--radius btn--green">Ok</button>
+                </div>
+           
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+        
+        <div class="wrapper wrapper--w960">
+            <div class="input-group" style="background-color:white;padding: 10px">
+                <h3 class="input--style-2">Rent vs buy a house decision is a dilemma that majority face while buying first home. 
+                    It is one of the tough decisions of life. Why?
+                </h3>
+                <h3 class="input--style-2"> When it comes to finding a long-term accommodation, we look at what makes better 
+                    sense – living in a rented house or buying a property, Many people will take help of financial advisors to take the decision, Why not AI, 
+                    let AI model give suggesions for you based on your parameters.
+               </h3>
+            </div>
+            
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Own House Vs Rent House</h2>
+                    <form id = "myForm" method="POST">
+                        
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input id = "p_cost" class="input--style-2" type="text" placeholder="Property Cost" name="p_cost"> 
+                                                                  
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title="Cost of buying house" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                                
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input id = "loan" class="input--style-2" type="text" placeholder="Loan Amount" name="loan">
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title = "If you are taking any loan" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input class="input--style-2" type="text" placeholder="Loan Interest" id="l_interest" name="l_interest">
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title = "loan interest percentage" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input class="input--style-2" type="text" placeholder="Loan Tenure in Years" id="years" name="years">
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title = "No.of years for paying the loan" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select id = "houseType" name="class" style="text-decoration: underline;">
+                                        <option value = 'none' disabled="disabled" selected="selected">Select House type</option>
+                                        <option value = '0'>Individual House</option>
+                                        <option value = '1'>Flat in Apartment</option>
+                                        
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input class="input--style-2" type="text" placeholder="Rent paying" id="rent" name="rent">
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title = "Rent paying amount if any" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input class="input--style-2" type="text" placeholder="Savings Amount" id="savings" name="savings">
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title = "monthly savings" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group" style = "display:inline-block;">
+                                    <input class="input--style-2" type="text" placeholder="savings interest" id="s_interest" name="s_interest">
+                                </div>
+                                <div style = "display:inline-block;">
+                                    <i title = "if your investing your savings,mention return percentage of the investment" class="fa fa-exclamation-circle" style="font-size:24px"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div >
+                            <h4 class="input--style-2"> Note : Please fill 0 If any field is not applicable to you</h4>
+                        </div>
+                        <!-- <div class="se-pre-con">
+                            <i  id = "buffering" style = "color:red;font-size:30px;display:none" class="fa fa-spinner fa-spin"></i>
+                        </div> -->
+                        <div class="p-t-30">
+                            <button id = "evaluate" class="btn btn--radius btn--green" type="button">Evaluate</button>
+                            <i  id = "buffering" style = "color:red;font-size:25px;display:none" class=" se-pre-con fa fa-spinner fa-spin"></i>
+                        </div>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+   <script src="static/vendor/jquery/jquery.min.js"></script>
+   <!-- <script src="static/vendor/jquery/jquery.validate.min.js"></script> -->
+    <!-- Vendor JS-->
+    <script src="static/vendor/select2/select2.min.js"></script>
+    <script src="static/vendor/datepicker/moment.min.js"></script>
+    <script src="static/vendor/datepicker/daterangepicker.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+
+
+    <!-- Main JS-->
+    <script src="static/js/global.js"></script>
+    <script src="static/js/main.js"></script>
+
+    
+
+</body>
+
+</html>
+<!-- end document-->
